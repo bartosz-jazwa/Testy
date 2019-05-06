@@ -20,9 +20,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
-
-    String encodedPassword = new BCryptPasswordEncoder().encode("haselko");
-
     @Autowired
     UserDetailsServiceImpl userDetailsService;
 

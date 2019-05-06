@@ -55,7 +55,7 @@ public class TodoControllerTest {
 
     @Test
     public void getSingleTodoTest() throws Exception {
-        Todo todo1 = new Todo(1L,"Zakupy","chlep");
+        Todo todo1 = new Todo(1L,"Zakupy","chleb");
         Todo todo2 = new Todo(2L,"Remont","kolanko");
 
         List<Todo> todos = new ArrayList<>();
@@ -63,13 +63,13 @@ public class TodoControllerTest {
         todos.add(todo2);
 
 
-        when(todoService.findOne(any())).thenReturn(Optional.ofNullable(todo1));
+        when(todoService.findOne(any())).thenReturn(Optional.of(todo1));
 
         mockMvc.perform(get("/todo/1"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("oneTodo"))
                 .andExpect(model().attributeExists("singleTodo"))
-                .andExpect(model().attribute("singleTodo",Optional.ofNullable(todo1)));
+                .andExpect(model().attribute("singleTodo",todo1));
 
                 //.andExpect(model().attributeExists("singleTodo"));
                 //.andExpect(model().attributeDoesNotExist("singleTodo"));

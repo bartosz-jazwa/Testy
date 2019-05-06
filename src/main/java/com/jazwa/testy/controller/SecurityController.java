@@ -10,4 +10,9 @@ public class SecurityController {
     String priv(){
         return "private";
     }
+
+    @GetMapping("/sciezka")
+    String sciezka(){
+        return "private";
+    }
 }

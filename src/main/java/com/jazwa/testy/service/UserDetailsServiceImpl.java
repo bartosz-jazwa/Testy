@@ -8,6 +8,9 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
@@ -21,14 +24,16 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
     UserRepository userRepository;
+    @Autowired
+    PasswordEncoder encoder;
 
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
         User user  = userRepository.findByUsername(s).orElseThrow(EntityNotFoundException::new);
 
-        GrantedAuthority admin = new SimpleGrantedAuthority("ADMIN");
+        GrantedAuthority authority = new SimpleGrantedAuthority(user.getRole());
 
-        UserDetails userDetails = new org.springframework.security.core.userdetails.User(user.getUsername(),user.getPassword(), Arrays.asList(admin));
+        UserDetails userDetails = new org.springframework.security.core.userdetails.User(user.getUsername(),encoder.encode(user.getPassword()), Arrays.asList(authority));
         return userDetails;
     }
 }
