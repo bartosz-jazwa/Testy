@@ -22,8 +22,10 @@ public class TestyApplication implements CommandLineRunner {
     public void run(String... args) throws Exception {
         User user = new User("user","user","USER");
         User admin = new User("admin", "admin", "ADMIN");
+        User guest = new User("guest", "guest", "ADMIN");
 
         userRepository.save(user);
         userRepository.save(admin);
+        userRepository.save(guest);
     }
 }

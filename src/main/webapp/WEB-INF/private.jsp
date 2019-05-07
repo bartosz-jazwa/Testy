@@ -1,1 +1,0 @@
-<h1>Widok chroniony</h1>

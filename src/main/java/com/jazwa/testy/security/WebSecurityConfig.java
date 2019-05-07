@@ -44,8 +44,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .headers().frameOptions().disable() //odblokowuje baze H2
                 .and()                              //odblokowuje baze H2
                 .authorizeRequests()
-                .antMatchers("/prywatna").authenticated()   //do tej sciezki tylko zalogowani
-                .antMatchers("/sciezka").hasAuthority("ADMIN") //do tej sciezki tylko admin
+                .antMatchers("/user").authenticated()   //do tej sciezki tylko zalogowani
+                .antMatchers("/admin").hasAuthority("ADMIN") //do tej sciezki tylko admin
                 .anyRequest()
                 .permitAll()
                 .and()

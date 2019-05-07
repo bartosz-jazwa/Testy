@@ -1,0 +1,1 @@
+<h1>Zarejestrowano uzytkownika ${admin}</h1>
